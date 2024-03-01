@@ -4,7 +4,7 @@ from django.http import HttpResponse
 # Create your views here.
 
 def index(request):
-    context={"message" : "message"}
+    context={"message" : "Bien venu dans la page principale"}
     templet=loader.get_template("app/index.html")
     
     return HttpResponse(templet.render(context,request))
