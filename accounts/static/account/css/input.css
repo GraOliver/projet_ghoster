@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    @apply bg-gray-100 flex justify-center top-1/2
+}
+.boite{
+    @apply shadow-lg bg-white mb-4 px-9 py-4  mt-4 w-auto
+}
+label{
+    @apply text-gray-500  
+}
+span{
+    @apply bg-red-100 text-red-700 rounded border border-red-700 py-3 px-2 block w-auto;
+    @apply mb-4
+    
+}
+input{
+    @apply mb-4 border shadow-inner text-gray-600 ml-2  justify-center  block
+}
+input:focus{
+    @apply border border-green-500 
+}
+button:focus{
+    @apply border-green-700 
+}
+button{
+    @apply flex w-full justify-center
+}
+
+button{
+    @apply bg-blue-300  border border-blue-900 w-1/2 px-3 py-2;
+    @apply rounded text-blue-950
+}
+button:hover{
+    @apply bg-green-300 transition text-gray-600 border-green-700
+}
+.html_conn{
+    @apply flex justify-center
+}
+.error{
+    @apply  text-red-700 rounded px-3 py-2 block w-auto mb-4 
+}

@@ -1,12 +1,12 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html class="html_conn">
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='{% static "account/css/main.css"%}'>
+    <link rel='stylesheet' type='text/css' media='screen' href='{% static "account/css/css/main.css"%}'>
     <link rel='stylesheet' type='text/css' media='screen' href='{% static "global.css"%}'>
     <script src='main.js'></script>
 </head>
@@ -21,22 +21,25 @@
     </div>
     <form action="" method="post">
         {%csrf_token%}
-        <div class="">
+        <div class="boite">
             <div class=" champ">
                 <label for="username">Nom d'utilisateur : </label><input type="text" name="username" id="">
                 <label for="password">Mot de passe : </label><input type="password" name="password" id="">
             </div>
-            <div>
-                <span>
+            <div class="">
+                
                      <!-- message d'erreur en cas de faut compte -->
-                     {% for message in messages %}
-                        {{message}}
-                        <a href="{% url 'accounts:pass_forgeted' %}">Mot de pass oublier</a>
-                     {% endfor%}
-                </span>
+                    {% for message in messages %}
+                        <span class="">
+                            {{message}}
+                        </span>
+                        <a href="{% url 'accounts:pass_forgeted' %}" class="error">Mot de pass oublier</a>
+                    {% endfor%}
+                
+               
             </div>
             <div>
-                <input type="submit" value="Connexion" class="bouton">
+                <button>Connexion</button>
             </div>
             
         </div>

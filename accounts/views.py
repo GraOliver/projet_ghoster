@@ -4,27 +4,57 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from .forms import LoginUser,UserChangeForm,UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm,UserCreationForm,UserChangeForm
-# Create your views here.
+from django.views.generic import View
 message_erreur ="Identifiant ou mot de passe incorecte"
 
-def login_app(request): # connexion du client
-    if request.method =='POST': # au clique on recupeur les données dans les champ
-        username =request.POST["username"]
-        password =request.POST["password"]
-        user =authenticate(request,username=username,password =password) # verification des valeur entrer par
+
+class LoginAppView(View):
+    """cette classe vas gérer la connexion dans la page de notre application
+
+    Args:
+        View : il herite de la classe générique Vieu pour sa gestion 
+    """
+    template ="accounts\login.html"
+    auth_form_class =AuthenticationForm 
+    
+    def get(self,request):
+        """Elle vas gerer que le poste de l'application
+
+        Args:
+            request (): requette envoyer depui la form
+        """
+        form =self.auth_form_class()
+        return render(request,self.template,{"message":form})
+    
+    def post(self,request):
+        form =self.auth_form_class(request.POST)
         
-        if user is not None :
-            return redirect("app:indexOfApp")
-        else :
-            messages.info(request,message_erreur)    
+        if request.method =='POST':
+            user =authenticate(request,
+                username=request.POST["username"],
+                password=request.POST["password"]
+            )
             
-    return render(request,"accounts/login.html",{"message":AuthenticationForm()})
+            if user is not None :
+                return redirect("app:indexOfApp")
+            else:
+                messages.info(request,message_erreur)        
+                
+        return render(request,"accounts/login.html",{"message":form})  
 
 
+class LogoutUserView(View):
+    """la deconnection de l'utilisateur 
 
-def logout_app(request):
-    logout(request)
-    return redirect("accounts:login")
+    Args:
+        View (_type_): _description_
+    """
+    direction ="accounts:login"
+    def get(self,request):
+        logout(request)
+        return redirect("accounts:login")
+
+
 
 def register_app(request):
     if request.method=='POST':
@@ -32,6 +62,10 @@ def register_app(request):
     
     form = UserCreationForm()
     return render(request,"accounts/register.html",{"form":form}) 
+
+def user_change_pass(request):
+    form =UserChangeForm()
+    return render(request,"accounts/pass_forgeted.html",{"form":form})
 
 def pass_forgeted(request):
     form =UserChangeForm()
