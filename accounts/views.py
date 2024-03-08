@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import Http404,HttpResponse
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
-from .forms import LoginUser,UserChangeForm,UserCreationSign
+from .forms import LoginUser,UserChangeSign,UserCreationSign
 from django.contrib.auth.forms import AuthenticationForm,UserCreationForm,UserChangeForm
 from django.views.generic import View
 message_erreur ="Identifiant ou mot de passe incorecte"
@@ -43,7 +43,6 @@ class LoginAppView(View):
                 
         return render(request,"accounts/login.html",{"form":form})  
 
-
 class LogoutUserView(View):
     """la deconnection de l'utilisateur 
 
@@ -63,11 +62,15 @@ class UserRegister(View):
         pass
 
 def register_app(request):
-    form =UserCreationSign
-    if request.method=='POST':
-       pass
     
-    form = UserCreationSign()
+    if request.method=='POST':
+        form =UserCreationSign(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("app:indexOffApp")
+    else:    
+        form = UserCreationSign()
+        
     return render(request,"accounts/register.html",{"form":form}) 
 
 def user_change_pass(request):

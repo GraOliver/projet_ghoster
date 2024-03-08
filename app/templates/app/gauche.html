@@ -1,0 +1,8 @@
+<!-- les information sur celui qui est connecté -->
+<img src="" alt="" srcset="">
+{% if user.is_authenticated %}
+    <span>{{user.first_name}} {{user.last_name}} </span>
+{% endif %}
+<div class="lien">
+    <a href="{% url 'accounts:logout' %}">Se deconnecter</a>
+</div>

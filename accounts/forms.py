@@ -12,6 +12,7 @@ class UserCreationSign(forms.UserCreationForm):
         fields=['username','email','first_name','last_name','role']
     
 
-class UserChangeForm(forms.UserChangeForm):
+class UserChangeSign(forms.UserChangeForm):
     class Meta(forms.UserChangeForm.Meta):
         model=get_user_model()
+        fields=['username','email','first_name','last_name','role']

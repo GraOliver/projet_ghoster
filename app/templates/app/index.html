@@ -12,7 +12,13 @@
 <body>
     {% include 'app/entet_pied/header.html'%}
     {{message}}
-
-    <a href="{% url 'accounts:logout'%}">Se deconnecter</a>
+    <div class="gauache">
+        <!-- nous allons ici afficher les iformation d'utilisateur -->
+        {% include 'app/gauche.html' %}
+    </div>
+    <div class="actualite">
+        <!-- Les actualité qui vont se defiler devant  -->
+        {% include 'app/actualite.html' %}
+    </div>
 </body>
 </html>
