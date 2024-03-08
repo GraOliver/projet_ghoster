@@ -1,14 +1,15 @@
 from django.contrib.auth import forms
-from django import forms as form_avant
+from django import forms as form_princ
 from django.contrib.auth import get_user_model
 
-class LoginUser(form_avant.Form):
-    pass
+class LoginUser(form_princ.Form):
+    username =form_princ.CharField(max_length=63,label="Nom d'utilisateur")
+    password=form_princ.CharField(max_length=63,widget=form_princ.PasswordInput,label="Mot de passe")
 
-class UserCreationForm(forms.UserCreationForm):
+class UserCreationSign(forms.UserCreationForm):
     class Meta(forms.UserCreationForm.Meta):
         model=get_user_model()
-        fields="__all__"
+        fields=['username','email','first_name','last_name','role']
     
 
 class UserChangeForm(forms.UserChangeForm):
